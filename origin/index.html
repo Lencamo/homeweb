@@ -1,0 +1,960 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevKit | Modern Developer Tools</title>
+    <style>
+      :root {
+        --bg-color: #050505;
+        --panel-bg: rgba(255, 255, 255, 0.03);
+        --panel-border: rgba(255, 255, 255, 0.1);
+        --panel-hover: rgba(255, 255, 255, 0.05);
+        --text-main: #ededed;
+        --text-muted: #a1a1aa;
+
+        --color-blue: #3b82f6;
+        --color-cyan: #06b6d4;
+        --color-green: #10b981;
+        --color-orange: #f59e0b;
+        --color-pink: #ec4899;
+
+        --font-sans:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --font-mono:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+          monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        font-family: var(--font-sans);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: var(--color-blue);
+        text-decoration: none;
+        transition: opacity 0.2s;
+      }
+
+      a:hover {
+        opacity: 0.8;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      section {
+        padding: 80px 0;
+        border-bottom: 1px solid var(--panel-border);
+      }
+
+      section:last-child {
+        border-bottom: none;
+      }
+
+      .section-header {
+        margin-bottom: 48px;
+      }
+
+      .section-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--text-main);
+      }
+
+      .section-subtitle {
+        color: var(--text-muted);
+        font-size: 16px;
+      }
+
+      /* Panel & Card Styles */
+      .panel {
+        background: var(--panel-bg);
+        border: 1px solid var(--panel-border);
+        border-radius: 8px;
+        padding: 24px;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+
+      .panel:hover {
+        background: var(--panel-hover);
+        border-color: rgba(255, 255, 255, 0.15);
+      }
+
+      .grid {
+        display: grid;
+        gap: 24px;
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .grid-4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      @media (max-width: 768px) {
+        .grid-2,
+        .grid-3,
+        .grid-4 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Typography */
+      .mono {
+        font-family: var(--font-mono);
+        font-size: 0.9em;
+      }
+
+      .tag {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 4px;
+        background: rgba(6, 182, 212, 0.1);
+        color: var(--color-cyan);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        border: 1px solid rgba(6, 182, 212, 0.2);
+      }
+
+      .tag.blue {
+        background: rgba(59, 130, 246, 0.1);
+        color: var(--color-blue);
+        border-color: rgba(59, 130, 246, 0.2);
+      }
+      .tag.green {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--color-green);
+        border-color: rgba(16, 185, 129, 0.2);
+      }
+      .tag.orange {
+        background: rgba(245, 158, 11, 0.1);
+        color: var(--color-orange);
+        border-color: rgba(245, 158, 11, 0.2);
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 1px solid transparent;
+      }
+
+      .btn-primary {
+        background: var(--color-blue);
+        color: #fff;
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+      }
+
+      .btn-primary:hover {
+        background: #2563eb;
+        opacity: 1;
+      }
+
+      .btn-secondary {
+        background: var(--panel-bg);
+        border: 1px solid var(--panel-border);
+        color: var(--text-main);
+      }
+
+      .btn-secondary:hover {
+        background: var(--panel-hover);
+        border-color: rgba(255, 255, 255, 0.2);
+        opacity: 1;
+      }
+
+      .btn-group {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      /* Code Card */
+      .code-card {
+        background: #0d0d0d;
+        border: 1px solid var(--panel-border);
+        border-radius: 8px;
+        overflow: hidden;
+        font-family: var(--font-mono);
+        font-size: 14px;
+      }
+
+      .code-header {
+        background: rgba(255, 255, 255, 0.02);
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--panel-border);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .code-dots {
+        display: flex;
+        gap: 6px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--panel-border);
+      }
+
+      .dot:nth-child(1) {
+        background: #ef4444;
+      }
+      .dot:nth-child(2) {
+        background: #f59e0b;
+      }
+      .dot:nth-child(3) {
+        background: #10b981;
+      }
+
+      .code-title {
+        color: var(--text-muted);
+        font-size: 12px;
+        margin-left: 8px;
+      }
+
+      .code-body {
+        padding: 16px;
+        overflow-x: auto;
+        color: #d4d4d8;
+        white-space: pre;
+      }
+
+      /* Syntax Highlighting Classes */
+      .token.keyword {
+        color: var(--color-pink);
+      }
+      .token.function {
+        color: var(--color-blue);
+      }
+      .token.string {
+        color: var(--color-green);
+      }
+      .token.comment {
+        color: var(--text-muted);
+        font-style: italic;
+      }
+      .token.punctuation {
+        color: #8b949e;
+      }
+      .token.property {
+        color: var(--color-cyan);
+      }
+      .token.class {
+        color: var(--color-orange);
+      }
+
+      /* Comparison Table */
+      .compare-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+      }
+
+      .compare-table th,
+      .compare-table td {
+        padding: 16px;
+        border-bottom: 1px solid var(--panel-border);
+      }
+
+      .compare-table th {
+        font-weight: 500;
+        color: var(--text-muted);
+      }
+
+      .compare-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      @media (max-width: 640px) {
+        .compare-table {
+          display: block;
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+      }
+
+      /* Header & Nav */
+      header {
+        border-bottom: 1px solid var(--panel-border);
+        background: rgba(5, 5, 5, 0.8);
+        backdrop-filter: blur(12px);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 64px;
+      }
+
+      .logo {
+        font-weight: 600;
+        font-family: var(--font-mono);
+        color: var(--text-main);
+        font-size: 16px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 24px;
+      }
+
+      .nav-links a {
+        color: var(--text-muted);
+        font-size: 14px;
+      }
+
+      .nav-links a:hover {
+        color: var(--text-main);
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 120px 0 80px;
+        display: flex;
+        align-items: center;
+        gap: 64px;
+      }
+
+      .hero-content {
+        flex: 1;
+      }
+
+      .hero-visual {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .hero-title {
+        font-size: 48px;
+        line-height: 1.1;
+        font-weight: 700;
+        margin-bottom: 24px;
+        letter-spacing: -0.02em;
+      }
+
+      .hero-title span {
+        color: var(--color-cyan);
+      }
+
+      .hero-desc {
+        font-size: 20px;
+        color: var(--text-muted);
+        margin-bottom: 40px;
+        max-width: 600px;
+      }
+
+      @media (max-width: 992px) {
+        .hero {
+          flex-direction: column;
+          padding: 80px 0 40px;
+        }
+        .hero-title {
+          font-size: 36px;
+        }
+        .hero-desc {
+          font-size: 18px;
+        }
+        .hero-visual {
+          width: 100%;
+        }
+      }
+
+      /* Integrations */
+      .integrations {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 32px;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.7;
+      }
+
+      .integration-logo {
+        font-family: var(--font-mono);
+        font-size: 20px;
+        font-weight: bold;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .integration-logo:hover {
+        color: var(--text-main);
+      }
+
+      /* Footer */
+      footer {
+        padding: 48px 0;
+        border-top: 1px solid var(--panel-border);
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 14px;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        margin-bottom: 16px;
+      }
+
+      /* Utility */
+      .mb-2 {
+        margin-bottom: 8px;
+      }
+      .mb-4 {
+        margin-bottom: 16px;
+      }
+      .mb-6 {
+        margin-bottom: 24px;
+      }
+      .mb-8 {
+        margin-bottom: 32px;
+      }
+
+      .text-blue {
+        color: var(--color-blue);
+      }
+      .text-cyan {
+        color: var(--color-cyan);
+      }
+      .text-green {
+        color: var(--color-green);
+      }
+      .text-orange {
+        color: var(--color-orange);
+      }
+
+      /* DevKit 专用样式 */
+      .hero-centered {
+        text-align: center;
+        padding: 100px 0 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-centered .hero-title {
+        font-size: 56px;
+        max-width: 800px;
+        margin: 0 auto 24px;
+      }
+
+      .hero-centered .hero-desc {
+        font-size: 20px;
+        max-width: 640px;
+        margin: 0 auto 40px;
+      }
+
+      .install-box {
+        background: #0d0d0d;
+        border: 1px solid var(--panel-border);
+        padding: 16px 24px;
+        border-radius: 8px;
+        font-family: var(--font-mono);
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 48px;
+        color: var(--text-main);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .install-box .prompt {
+        color: var(--color-pink);
+      }
+
+      .install-box .copy-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid transparent;
+        color: var(--text-muted);
+        padding: 4px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.2s;
+      }
+
+      .install-box .copy-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.2);
+        color: var(--text-main);
+      }
+
+      .stats-row {
+        display: flex;
+        justify-content: center;
+        gap: 64px;
+        padding-top: 32px;
+        border-top: 1px solid var(--panel-border);
+        width: 100%;
+        max-width: 800px;
+      }
+
+      .stat-item .value {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--text-main);
+        font-family: var(--font-mono);
+        margin-bottom: 4px;
+      }
+
+      .stat-item .label {
+        font-size: 14px;
+        color: var(--text-muted);
+      }
+
+      .feature-icon {
+        font-size: 24px;
+        margin-bottom: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--panel-border);
+        border-radius: 12px;
+        color: var(--color-cyan);
+      }
+
+      .preview-section {
+        display: flex;
+        align-items: center;
+        gap: 64px;
+      }
+
+      .bullet-list {
+        list-style: none;
+        margin-top: 24px;
+      }
+
+      .bullet-list li {
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--text-muted);
+        font-size: 16px;
+      }
+
+      .bullet-list li::before {
+        content: '✓';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--color-green);
+        font-size: 12px;
+      }
+
+      .cta-section {
+        text-align: center;
+        padding: 100px 0;
+        background: radial-gradient(circle at top, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+        border-top: 1px solid var(--panel-border);
+        margin-top: 80px;
+      }
+
+      .benefits {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 24px;
+        margin-top: 32px;
+        color: var(--text-muted);
+        font-size: 14px;
+      }
+
+      .benefits span {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .benefits span::before {
+        content: '•';
+        color: var(--color-cyan);
+      }
+
+      .integration-card {
+        padding: 16px 32px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: bold;
+      }
+
+      @media (max-width: 992px) {
+        .hero-centered .hero-title {
+          font-size: 40px;
+        }
+        .stats-row {
+          flex-direction: column;
+          gap: 24px;
+          align-items: center;
+          text-align: center;
+        }
+        .preview-section {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 头部导航 -->
+    <header>
+      <div class="container nav-container">
+        <div class="logo"><span class="text-blue">▲</span> DevKit</div>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#preview">Code Preview</a>
+          <a href="#integrations">Integrations</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero 区域 -->
+    <section class="container hero-centered">
+      <div class="tag blue mb-6" style="border-radius: 999px; padding: 4px 16px">
+        v2.0 Now Available
+      </div>
+      <h1 class="hero-title">
+        Build faster with <br /><span class="text-cyan">modern dev tools</span>
+      </h1>
+      <p class="hero-desc">
+        A complete toolkit for modern developers. Ship production-ready code faster with intelligent
+        autocomplete, real-time collaboration, and seamless integrations.
+      </p>
+
+      <div class="install-box">
+        <span class="prompt">$</span>
+        <span>npm install @devkit/cli</span>
+        <button class="copy-btn" onclick="alert('Copied to clipboard!')">Copy</button>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="value text-blue">50K+</div>
+          <div class="label">Developers</div>
+        </div>
+        <div class="stat-item">
+          <div class="value text-cyan">1M+</div>
+          <div class="label">Downloads</div>
+        </div>
+        <div class="stat-item">
+          <div class="value text-green">99.9%</div>
+          <div class="label">Uptime</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 功能特性 (Features) -->
+    <section id="features" class="container">
+      <div class="section-header text-center" style="max-width: 600px; margin: 0 auto 48px">
+        <h2 class="section-title" style="font-size: 32px">Everything you need to ship faster</h2>
+        <p class="section-subtitle">Features</p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="panel">
+          <div class="feature-icon" style="color: var(--color-pink)">✧</div>
+          <h3 class="mb-2 text-main">AI Autocomplete</h3>
+          <p class="text-muted" style="font-size: 14px">
+            Context-aware code suggestions powered by machine learning.
+          </p>
+        </div>
+        <div class="panel">
+          <div class="feature-icon" style="color: var(--color-blue)">⚡</div>
+          <h3 class="mb-2 text-main">Real-time Collab</h3>
+          <p class="text-muted" style="font-size: 14px">
+            Code together with your team in real-time, anywhere.
+          </p>
+        </div>
+        <div class="panel">
+          <div class="feature-icon" style="color: var(--color-orange)">⎇</div>
+          <h3 class="mb-2 text-main">Git Integration</h3>
+          <p class="text-muted" style="font-size: 14px">
+            Built-in version control with visual diff and merge tools.
+          </p>
+        </div>
+        <div class="panel">
+          <div class="feature-icon" style="color: var(--color-green)">🚀</div>
+          <h3 class="mb-2 text-main">Fast & Lightweight</h3>
+          <p class="text-muted" style="font-size: 14px">
+            Optimized performance with minimal resource usage.
+          </p>
+        </div>
+        <div class="panel">
+          <div class="feature-icon" style="color: var(--color-cyan)">🧩</div>
+          <h3 class="mb-2 text-main">Extensions</h3>
+          <p class="text-muted" style="font-size: 14px">
+            Thousands of extensions to customize your workflow.
+          </p>
+        </div>
+        <div class="panel">
+          <div class="feature-icon" style="color: var(--text-main)">☁️</div>
+          <h3 class="mb-2 text-main">Cloud Sync</h3>
+          <p class="text-muted" style="font-size: 14px">
+            Sync settings and projects across all your devices.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 代码预览 (Code Preview) -->
+    <section
+      id="preview"
+      class="container preview-section"
+      style="padding-top: 80px; padding-bottom: 80px"
+    >
+      <div class="hero-content" style="flex: 1">
+        <h2 class="section-title" style="font-size: 32px">Write code smarter</h2>
+        <p class="hero-desc" style="font-size: 18px; margin-bottom: 24px">
+          Our intelligent code editor understands your codebase and provides context-aware
+          suggestions, helping you write better code faster.
+        </p>
+        <ul class="bullet-list">
+          <li>AI-powered autocomplete with 95% accuracy</li>
+          <li>Real-time error detection and fixes</li>
+          <li>Smart refactoring suggestions</li>
+          <li>Inline documentation on hover</li>
+        </ul>
+      </div>
+
+      <div class="hero-visual" style="flex: 1.2">
+        <div class="code-card" style="box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4)">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+            <span class="code-title">app.ts</span>
+          </div>
+          <div class="code-body">
+            <span class="token keyword">import</span>
+            <span class="token punctuation">{</span> DevKit <span class="token punctuation">}</span>
+            <span class="token keyword">from</span> <span class="token string">'@devkit/core'</span
+            ><span class="token punctuation">;</span>
+
+            <span class="token keyword">const</span> app <span class="token operator">=</span>
+            <span class="token keyword">new</span> <span class="token class">DevKit</span
+            ><span class="token punctuation">(</span
+            ><span class="token punctuation">{</span> ai<span class="token punctuation">:</span>
+            <span class="token keyword">true</span
+            ><span class="token punctuation">,</span> collab<span class="token punctuation">:</span>
+            <span class="token keyword">true</span
+            ><span class="token punctuation">,</span> theme<span class="token punctuation">:</span>
+            <span class="token string">'dark'</span> <span class="token punctuation">}</span
+            ><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// AI suggests: Add error handling</span>
+            app<span class="token punctuation">.</span><span class="token function">start</span
+            ><span class="token punctuation">(</span><span class="token punctuation">)</span
+            ><span class="token punctuation">.</span><span class="token function">then</span
+            ><span class="token punctuation">(</span><span class="token punctuation">(</span
+            ><span class="token punctuation">)</span> <span class="token operator">=></span>
+            <span class="token punctuation">{</span> console<span class="token punctuation">.</span
+            ><span class="token function">log</span><span class="token punctuation">(</span
+            ><span class="token string">'Ready!'</span><span class="token punctuation">)</span
+            ><span class="token punctuation">;</span> <span class="token punctuation">}</span
+            ><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技术集成 (Integrations) -->
+    <section id="integrations" class="container text-center" style="padding-top: 80px">
+      <div class="section-header" style="max-width: 600px; margin: 0 auto 48px">
+        <h2 class="section-title">Works with your favorite tools</h2>
+        <p class="section-subtitle">
+          Seamlessly integrate with the tools you already use and love.
+        </p>
+      </div>
+
+      <div class="integrations" style="opacity: 1; gap: 40px; max-width: 800px; margin: 0 auto">
+        <div
+          class="panel"
+          style="
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+          "
+        >
+          <span class="text-main">GH</span> GitHub
+        </div>
+        <div
+          class="panel"
+          style="
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+          "
+        >
+          <span class="text-orange">GL</span> GitLab
+        </div>
+        <div
+          class="panel"
+          style="
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+          "
+        >
+          <span class="text-main">▲</span> Vercel
+        </div>
+        <div
+          class="panel"
+          style="
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+          "
+        >
+          <span class="text-orange">AWS</span> AWS
+        </div>
+        <div
+          class="panel"
+          style="
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+          "
+        >
+          <span class="text-blue">🐳</span> Docker
+        </div>
+        <div
+          class="panel"
+          style="
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+          "
+        >
+          <span class="text-pink">#</span> Slack
+        </div>
+        <div
+          class="panel"
+          style="
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+          "
+        >
+          <span class="text-blue">J</span> Jira
+        </div>
+        <div
+          class="panel"
+          style="
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+          "
+        >
+          <span class="text-main">L</span> Linear
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA 区域 -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="hero-title" style="font-size: 40px; margin-bottom: 24px">
+          Ready to build faster?
+        </h2>
+        <p class="hero-desc" style="margin: 0 auto 32px; max-width: 500px; font-size: 18px">
+          Join thousands of developers who ship better code with DevKit. Start free, no credit card
+          required.
+        </p>
+
+        <a
+          href="#"
+          class="btn btn-primary"
+          style="padding: 16px 32px; font-size: 18px; border-radius: 8px"
+        >
+          Start free
+        </a>
+
+        <div class="benefits">
+          <span>Free forever plan</span>
+          <span>No credit card</span>
+          <span>Cancel anytime</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer style="border-top: none; padding-top: 0">
+      <div class="container" style="border-top: 1px solid var(--panel-border); padding-top: 48px">
+        <div class="logo mb-4" style="text-align: center">
+          <span class="text-blue">▲</span> DevKit
+        </div>
+        <div class="footer-links">
+          <a href="#">Product</a>
+          <a href="#">Docs</a>
+          <a href="#">Pricing</a>
+          <a href="#">Blog</a>
+          <a href="#">Contact</a>
+        </div>
+        <p>© 2024 DevKit Inc. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
