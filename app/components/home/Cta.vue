@@ -1,13 +1,19 @@
 <template>
   <section class="cta-section">
     <div class="container">
-      <h2 class="hero-title" style="font-size: 40px; margin-bottom: 24px">Ready to build faster?</h2>
+      <h2 class="hero-title" style="font-size: 40px; margin-bottom: 24px">
+        Ready to build faster?
+      </h2>
       <p class="hero-desc" style="margin: 0 auto 32px; max-width: 500px; font-size: 18px">
         Join thousands of developers who ship better code with lencamo. Start free, no credit card
         required.
       </p>
 
-      <a href="#" class="btn btn-primary" style="padding: 16px 32px; font-size: 18px; border-radius: 8px">
+      <a
+        href="#"
+        class="btn btn-primary"
+        style="padding: 16px 32px; font-size: 18px; border-radius: 8px"
+      >
         Start free
       </a>
 
@@ -49,7 +55,6 @@
   padding: 100px 0;
   background: radial-gradient(circle at top, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
   border-top: 1px solid var(--panel-border);
-  margin-top: 80px;
 }
 
 .benefits {

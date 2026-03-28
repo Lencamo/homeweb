@@ -1,17 +1,18 @@
 <template>
   <HomeHero />
-  <HomeFeatures />
-  <HomePreview />
   <HomeIntegrations />
+  <HomeToolcli />
+  <HomePreview />
   <HomeCta />
+  <HomeFeatures />
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-  layout: 'default',
+  layout: 'default'
 })
 
 useHead({
-  title: 'lencamo | Modern Developer Tools',
+  title: 'lencamo | Modern Developer Tools'
 })
 </script>

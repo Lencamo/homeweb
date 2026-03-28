@@ -1,10 +1,5 @@
 <template>
   <section id="integrations" class="container text-center integrations-section">
-    <div class="section-header" style="max-width: 600px; margin: 0 auto 48px">
-      <h2 class="section-title">Works with your favorite tools</h2>
-      <p class="section-subtitle">Seamlessly integrate with the tools you already use and love.</p>
-    </div>
-
     <div class="integrations" style="opacity: 1; gap: 40px; max-width: 800px; margin: 0 auto">
       <div
         class="panel"
@@ -68,8 +63,8 @@
 
 <style scoped>
 .integrations-section {
-  padding-top: 80px;
-  padding-bottom: 80px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .integrations {
