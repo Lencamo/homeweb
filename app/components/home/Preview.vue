@@ -1,5 +1,5 @@
 <template>
-  <section id="preview" class="container preview-section">
+  <section id="tingnote" class="container preview-section">
     <div class="preview-content">
       <h2 class="section-title preview-title">{{ messages.preview.title }}</h2>
       <p class="hero-desc preview-desc">{{ messages.preview.description }}</p>

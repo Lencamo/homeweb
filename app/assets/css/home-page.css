@@ -3,8 +3,9 @@
   --panel-bg: rgba(255, 255, 255, 0.03);
   --panel-border: rgba(255, 255, 255, 0.1);
   --panel-hover: rgba(255, 255, 255, 0.05);
-  --topbar-row-height: 72px;
+  --topbar-row-height: 62px;
   --banner-row-height: 48px;
+  --anchor-offset: 35px;
   --text-main: #ededed;
   --text-muted: #a1a1aa;
 
@@ -14,8 +15,7 @@
   --color-orange: #f59e0b;
   --color-pink: #ec4899;
 
-  --font-sans:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-mono:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
     monospace;
@@ -25,6 +25,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  scroll-padding-top: var(--anchor-offset);
 }
 
 body {
@@ -54,6 +58,10 @@ a:hover {
 section {
   padding: 80px 0;
   border-bottom: 1px solid var(--panel-border);
+}
+
+section[id] {
+  scroll-margin-top: var(--anchor-offset);
 }
 
 section:last-child {

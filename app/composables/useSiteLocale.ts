@@ -50,9 +50,9 @@ export const siteMessages = {
     header: {
       logoAlt: 'lencamo logo',
       nav: [
-        { label: 'Features', href: '#features' },
-        { label: 'Code Preview', href: '#preview' },
-        { label: 'Integrations', href: '#integrations' }
+        { label: 'CLI', href: '#cli' },
+        { label: 'TingNote', href: '#tingnote' },
+        { label: 'Templates', href: '#templates' }
       ]
     },
     hero: {
@@ -177,9 +177,9 @@ export const siteMessages = {
     header: {
       logoAlt: 'lencamo 标志',
       nav: [
-        { label: '功能', href: '#features' },
-        { label: '产品预览', href: '#preview' },
-        { label: '技术栈', href: '#integrations' }
+        { label: 'CLI', href: '#cli' },
+        { label: '亭笔记', href: '#tingnote' },
+        { label: '模板', href: '#templates' }
       ]
     },
     hero: {

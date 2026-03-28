@@ -1,5 +1,5 @@
 <template>
-  <section class="container text-center toolcli-section">
+  <section id="cli" class="container text-center toolcli-section">
     <div class="section-header" style="max-width: 600px; margin: 0 auto 30px">
       <h2 class="section-title">{{ messages.toolcli.title }}</h2>
       <p class="section-subtitle">{{ messages.toolcli.description }}</p>

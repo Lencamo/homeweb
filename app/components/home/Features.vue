@@ -1,5 +1,5 @@
 <template>
-  <section id="features" class="container features-section">
+  <section id="templates" class="container features-section">
     <div class="section-header text-center" style="max-width: 600px; margin: 0 auto 48px">
       <h2 class="section-title" style="font-size: 32px">{{ messages.features.title }}</h2>
       <p class="section-subtitle">{{ messages.features.subtitle }}</p>
