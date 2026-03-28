@@ -1,17 +1,14 @@
 <template>
   <section class="container text-center toolcli-section">
     <div class="section-header" style="max-width: 600px; margin: 0 auto 30px">
-      <h2 class="section-title">Create, snippet, and generate with lencamo-cli</h2>
-      <p class="section-subtitle">
-        A lightweight CLI that helps you start clean, stay productive, and keep your setup work
-        out of the way.
-      </p>
+      <h2 class="section-title">{{ messages.toolcli.title }}</h2>
+      <p class="section-subtitle">{{ messages.toolcli.description }}</p>
     </div>
 
     <div
       :class="['install-box', { 'is-copied': copied }]"
       role="group"
-      aria-label="Install command"
+      :aria-label="messages.common.installCommandLabel"
     >
       <div class="install-box-content" aria-hidden="true">
         <span class="prompt" aria-hidden="true">
@@ -59,8 +56,8 @@
         class="install-box-action"
         role="button"
         tabindex="0"
-        :aria-label="copied ? 'Copied' : 'Copy command'"
-        :title="copied ? 'Copied' : 'Copy command'"
+        :aria-label="copied ? messages.common.copied : messages.common.copyCommand"
+        :title="copied ? messages.common.copied : messages.common.copyCommand"
         @click="copyInstallCommand"
         @keydown.enter.prevent="copyInstallCommand"
         @keydown.space.prevent="copyInstallCommand"
@@ -72,6 +69,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, ref } from 'vue'
 
+const { messages } = useSiteLocale()
 const installCommand = 'npm install -g lencamo-cli'
 const copied = ref(false)
 

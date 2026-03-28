@@ -1,13 +1,15 @@
 <template>
   <section class="container cta-section">
     <div class="container">
-      <h2 class="hero-title" style="font-size: 40px; margin-bottom: 24px">Try TingNote today</h2>
+      <h2 class="hero-title" style="font-size: 40px; margin-bottom: 24px">
+        {{ messages.cta.title }}
+      </h2>
       <p class="hero-desc" style="margin: 0 auto 32px; max-width: 500px; font-size: 18px">
-        Experience the power of TingNote and transform the way you capture and organize your ideas.
+        {{ messages.cta.description }}
       </p>
 
       <a href="#" class="cta-button">
-        <span>Get Started for free</span>
+        <span>{{ messages.cta.button }}</span>
         <span class="cta-button-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none">
             <path
@@ -29,13 +31,15 @@
       </a>
 
       <div class="benefits">
-        <span>Focused</span>
-        <span>Structured</span>
-        <span>Efficient</span>
+        <span v-for="item in messages.cta.benefits" :key="item">{{ item }}</span>
       </div>
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+const { messages } = useSiteLocale()
+</script>
 
 <style scoped>
 .cta-button {

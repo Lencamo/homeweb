@@ -1,15 +1,10 @@
 <template>
   <section id="preview" class="container preview-section">
     <div class="preview-content">
-      <h2 class="section-title preview-title">TingNote</h2>
-      <p class="hero-desc preview-desc">
-        A focused workspace for writing, thinking, and organizing knowledge.
-      </p>
+      <h2 class="section-title preview-title">{{ messages.preview.title }}</h2>
+      <p class="hero-desc preview-desc">{{ messages.preview.description }}</p>
       <ul class="bullet-list">
-        <li>AI Q&amp;A for faster search and understanding</li>
-        <li>Tab completion to speed up editing</li>
-        <li>Real-time Markdown editing and preview</li>
-        <li>Mind mapping for structured organization</li>
+        <li v-for="item in messages.preview.bullets" :key="item">{{ item }}</li>
       </ul>
     </div>
 
@@ -21,7 +16,7 @@
             :style="{ transform: `translateX(-${activeIndex * 100}%)` }"
           >
             <div v-for="slide in slides" :key="slide.src" class="preview-slide">
-              <img class="preview-slide-image" :src="slide.src" loading="lazy" />
+              <img class="preview-slide-image" :src="slide.src" :alt="slide.alt" loading="lazy" />
             </div>
           </div>
         </div>
@@ -33,7 +28,7 @@
               :key="slide.src"
               :class="['preview-carousel-dot', { 'is-active': index === activeIndex }]"
               type="button"
-              :aria-label="`Go to slide ${index + 1}`"
+              :aria-label="dotLabel(index + 1)"
               @click="goToSlide(index)"
             ></button>
           </div>
@@ -50,40 +45,37 @@ import homeImage from '~/assets/image/home.png'
 import mindImage from '~/assets/image/mind.png'
 import robotImage from '~/assets/image/robot.png'
 
-const slides = [
-  {
-    src: homeImage,
-    description: 'A quick look at the lencamo '
-  },
-  {
-    src: robotImage,
-    description: 'A supporting visual that extends the '
-  },
-  {
-    src: articleImage,
-    description: 'A content-oriented screen that helps present '
-  },
-  {
-    src: mindImage,
-    description: 'A more conceptual frame used to round out'
-  }
-] as const
+const { locale, messages } = useSiteLocale()
+
+const slideImages = [homeImage, robotImage, articleImage, mindImage] as const
+
+const slides = computed(() =>
+  slideImages.map((src, index) => ({
+    src,
+    description: messages.value?.preview.slides[index]?.description,
+    alt: messages.value?.preview.slides[index]?.alt
+  }))
+)
 
 const activeIndex = ref(0)
-const activeSlide = computed(() => slides[activeIndex.value])
+const activeSlide = computed(() => slides.value[activeIndex.value])
 
 let autoPlayTimer: ReturnType<typeof window.setInterval> | undefined
 
 function goToSlide(index: number) {
-  activeIndex.value = (index + slides.length) % slides.length
+  activeIndex.value = (index + slides.value.length) % slides.value.length
 }
 
 function nextSlide() {
   goToSlide(activeIndex.value + 1)
 }
 
-function previousSlide() {
-  goToSlide(activeIndex.value - 1)
+function dotLabel(index: number) {
+  if (locale.value === 'zh') {
+    return `${messages.value.common.goToSlide}${index}张`
+  }
+
+  return `${messages.value.common.goToSlide} ${index}`
 }
 
 function stopAutoPlay() {

@@ -2,20 +2,22 @@
   <footer style="border-top: none; padding-top: 0">
     <div class="container" style="border-top: 1px solid var(--panel-border); padding-top: 48px">
       <div class="logo mb-4" style="text-align: center">
-        <img src="/favicon.svg" alt="lencamo logo" class="logo-icon" />
+        <img :alt="messages.footer.logoAlt" src="/favicon.svg" class="logo-icon" />
         <span>lencamo</span>
       </div>
       <div class="footer-links">
-        <a href="#">Product</a>
-        <a href="#">Docs</a>
-        <a href="#">Pricing</a>
-        <a href="#">Blog</a>
-        <a href="#">Contact</a>
+        <a v-for="item in messages.footer.links" :key="item.label" :href="item.href">
+          {{ item.label }}
+        </a>
       </div>
-      <p>© 2024 lencamo. All rights reserved.</p>
+      <p>{{ messages.footer.copyright }}</p>
     </div>
   </footer>
 </template>
+
+<script setup lang="ts">
+const { messages } = useSiteLocale()
+</script>
 
 <style scoped>
 footer {
@@ -29,6 +31,7 @@ footer {
 .footer-links {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 24px;
   margin-bottom: 16px;
 }

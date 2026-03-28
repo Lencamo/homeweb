@@ -2,28 +2,29 @@
   <section class="container hero-centered">
     <img
       src="https://avatars.githubusercontent.com/u/78485535?v=4"
-      alt="lencamo avatar"
+      :alt="messages.hero.avatarAlt"
       class="avatar-image"
     />
 
     <h1 class="hero-title">
-      Hi， I'm lencamo<br />
-      <span class="text-cyan">Developer & Creator</span>
+      {{ messages.hero.title }}<br />
+      <span class="text-cyan">{{ messages.hero.highlight }}</span>
     </h1>
-    <p class="hero-desc">
-      I’m not someone defined by discipline, but an unproductive day leaves me uneasy. I’m not
-      inherently optimistic, yet I remain quietly hopeful about tomorrow.
-    </p>
+    <p class="hero-desc">{{ messages.hero.description }}</p>
 
     <div class="tag green hero-tag">
       <span class="hero-tag-dot" aria-hidden="true">
         <span class="hero-tag-dot-ping"></span>
         <span class="hero-tag-dot-core"></span>
       </span>
-      <span>Available for new opportunities</span>
+      <span>{{ messages.hero.status }}</span>
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+const { messages } = useSiteLocale()
+</script>
 
 <style scoped>
 .avatar-image {

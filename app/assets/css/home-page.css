@@ -3,6 +3,8 @@
   --panel-bg: rgba(255, 255, 255, 0.03);
   --panel-border: rgba(255, 255, 255, 0.1);
   --panel-hover: rgba(255, 255, 255, 0.05);
+  --topbar-row-height: 72px;
+  --banner-row-height: 48px;
   --text-main: #ededed;
   --text-muted: #a1a1aa;
 
