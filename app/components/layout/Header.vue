@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header :class="{ 'is-mobile-open': isMobileMenuOpen }">
     <div class="container nav-container">
       <div class="logo">
         <img :alt="messages.header.logoAlt" src="/favicon.svg" class="logo-icon" />
@@ -29,12 +29,84 @@
           </div>
         </div>
       </div>
+
+      <div
+        class="mobile-nav-toggle"
+        role="button"
+        tabindex="0"
+        :aria-expanded="isMobileMenuOpen"
+        aria-label="Toggle navigation menu"
+        @click="toggleMobileMenu"
+        @keydown.enter.prevent="toggleMobileMenu"
+        @keydown.space.prevent="toggleMobileMenu"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16" stroke="currentColor" stroke-linecap="round" stroke-width="2" />
+          <path d="M4 12h16" stroke="currentColor" stroke-linecap="round" stroke-width="2" />
+          <path d="M4 17h16" stroke="currentColor" stroke-linecap="round" stroke-width="2" />
+        </svg>
+      </div>
+    </div>
+
+    <div v-if="isMobileMenuOpen" class="mobile-menu">
+      <a
+        v-for="item in mobileNavItems"
+        :key="`mobile-${item.href}`"
+        :href="item.href"
+        class="mobile-menu-row"
+        @click="closeMobileMenu"
+      >
+        {{ item.label }}
+      </a>
+
+      <div class="mobile-menu-row mobile-menu-locale">
+        <div class="locale-switcher" role="group" :aria-label="messages.common.language">
+          <div
+            v-for="item in localeOptions"
+            :key="`mobile-locale-${item.value}`"
+            :class="['locale-option', { 'is-active': item.value === locale }]"
+            role="button"
+            tabindex="0"
+            :aria-pressed="item.value === locale"
+            @click="setLocaleAndClose(item.value)"
+            @keydown.enter.prevent="setLocaleAndClose(item.value)"
+            @keydown.space.prevent="setLocaleAndClose(item.value)"
+          >
+            {{ item.label }}
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
+import { computed, ref } from 'vue'
+
 const { locale, localeOptions, messages, setLocale } = useSiteLocale()
+
+const isMobileMenuOpen = ref(false)
+
+const mobileNavOrder = ['#cli', '#tingnote', '#templates'] as const
+
+const mobileNavItems = computed(() =>
+  mobileNavOrder
+    .map((href) => messages.value.header.nav.find((item) => item.href === href))
+    .filter((item): item is (typeof messages.value.header.nav)[number] => Boolean(item))
+)
+
+function toggleMobileMenu() {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+function closeMobileMenu() {
+  isMobileMenuOpen.value = false
+}
+
+function setLocaleAndClose(value: 'zh' | 'en') {
+  setLocale(value)
+  closeMobileMenu()
+}
 </script>
 
 <style scoped>
@@ -57,6 +129,11 @@ header {
   display: flex;
   align-items: center;
   gap: 18px;
+}
+
+.mobile-nav-toggle,
+.mobile-menu {
+  display: none;
 }
 
 .nav-links {
@@ -112,24 +189,54 @@ header {
 }
 
 @media (max-width: 768px) {
-  .nav-container,
-  .nav-actions {
-    flex-direction: column;
+  .nav-container {
+    min-height: 64px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .nav-actions {
-    width: 100%;
-    align-items: stretch;
+    display: none;
   }
 
-  .nav-links {
+  .mobile-nav-toggle {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 16px;
+    color: var(--text-main);
+    cursor: pointer;
   }
 
-  .locale-switcher {
-    align-self: center;
+  .mobile-nav-toggle svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  .mobile-menu {
+    display: block;
+    padding: 0px 16px;
+  }
+
+  .mobile-menu-row {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid var(--panel-border);
+    color: var(--text-main);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .mobile-menu-locale {
+    padding: 12px 0;
+  }
+
+  .mobile-menu-locale .locale-switcher {
+    align-self: flex-start;
   }
 }
 </style>
