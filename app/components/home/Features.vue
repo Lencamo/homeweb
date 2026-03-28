@@ -1,51 +1,54 @@
 <template>
   <section id="features" class="container features-section">
     <div class="section-header text-center" style="max-width: 600px; margin: 0 auto 48px">
-      <h2 class="section-title" style="font-size: 32px">Everything you need to ship faster</h2>
-      <p class="section-subtitle">Features</p>
+      <h2 class="section-title" style="font-size: 32px">Powerful Templates</h2>
+      <p class="section-subtitle">
+        Browse my template collection, from open-source starters to premium builds, and get
+        running faster with the setup that fits your project.
+      </p>
     </div>
 
     <div class="grid grid-3">
       <div class="panel">
         <div class="feature-icon" style="color: var(--color-pink)">✧</div>
-        <h3 class="mb-2 text-main">AI Autocomplete</h3>
+        <h3 class="mb-2 text-main">lencamo-cli</h3>
         <p class="text-muted" style="font-size: 14px">
-          Context-aware code suggestions powered by machine learning.
+          Open source CLI tooling for scaffolding, snippets, and everyday workflow support.
         </p>
       </div>
       <div class="panel">
         <div class="feature-icon" style="color: var(--color-blue)">⚡</div>
-        <h3 class="mb-2 text-main">Real-time Collab</h3>
+        <h3 class="mb-2 text-main">Open Blog Starter</h3>
         <p class="text-muted" style="font-size: 14px">
-          Code together with your team in real-time, anywhere.
+          An open source starter for content sites, blogs, and personal publishing.
         </p>
       </div>
       <div class="panel">
         <div class="feature-icon" style="color: var(--color-orange)">⎇</div>
-        <h3 class="mb-2 text-main">Git Integration</h3>
+        <h3 class="mb-2 text-main">Docs Starter</h3>
         <p class="text-muted" style="font-size: 14px">
-          Built-in version control with visual diff and merge tools.
+          A free project base for documentation, guides, and developer-facing content.
         </p>
       </div>
       <div class="panel">
         <div class="feature-icon" style="color: var(--color-green)">🚀</div>
-        <h3 class="mb-2 text-main">Fast &amp; Lightweight</h3>
+        <h3 class="mb-2 text-main">TingNote</h3>
         <p class="text-muted" style="font-size: 14px">
-          Optimized performance with minimal resource usage.
+          A premium writing product focused on notes, knowledge, and structured thinking.
         </p>
       </div>
       <div class="panel">
         <div class="feature-icon" style="color: var(--color-cyan)">🧩</div>
-        <h3 class="mb-2 text-main">Extensions</h3>
+        <h3 class="mb-2 text-main">SaaS Launch Kit</h3>
         <p class="text-muted" style="font-size: 14px">
-          Thousands of extensions to customize your workflow.
+          A paid project template for shipping polished SaaS landing pages and product sites.
         </p>
       </div>
       <div class="panel">
         <div class="feature-icon" style="color: var(--text-main)">☁️</div>
-        <h3 class="mb-2 text-main">Cloud Sync</h3>
+        <h3 class="mb-2 text-main">Premium Dashboard</h3>
         <p class="text-muted" style="font-size: 14px">
-          Sync settings and projects across all your devices.
+          A production-ready paid admin template with stronger structure and cleaner UI detail.
         </p>
       </div>
     </div>

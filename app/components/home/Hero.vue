@@ -7,12 +7,12 @@
     />
 
     <h1 class="hero-title">
-      Build faster with <br />
-      <span class="text-cyan">modern dev tools</span>
+      Hi， I'm lencamo<br />
+      <span class="text-cyan">Developer & Creator</span>
     </h1>
     <p class="hero-desc">
-      A complete toolkit for modern developers. Ship production-ready code faster with intelligent
-      autocomplete, real-time collaboration, and seamless integrations.
+      I’m not someone defined by discipline, but an unproductive day leaves me uneasy. I’m not
+      inherently optimistic, yet I remain quietly hopeful about tomorrow.
     </p>
 
     <div class="tag green hero-tag">

@@ -1,60 +1,81 @@
 <template>
-  <section class="cta-section">
+  <section class="container cta-section">
     <div class="container">
-      <h2 class="hero-title" style="font-size: 40px; margin-bottom: 24px">
-        Ready to build faster?
-      </h2>
+      <h2 class="hero-title" style="font-size: 40px; margin-bottom: 24px">Try TingNote today</h2>
       <p class="hero-desc" style="margin: 0 auto 32px; max-width: 500px; font-size: 18px">
-        Join thousands of developers who ship better code with lencamo. Start free, no credit card
-        required.
+        Experience the power of TingNote and transform the way you capture and organize your ideas.
       </p>
 
-      <a
-        href="#"
-        class="btn btn-primary"
-        style="padding: 16px 32px; font-size: 18px; border-radius: 8px"
-      >
-        Start free
+      <a href="#" class="cta-button">
+        <span>Get Started for free</span>
+        <span class="cta-button-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M5 12h14"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+            <path
+              d="m13 5 7 7-7 7"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </span>
       </a>
 
       <div class="benefits">
-        <span>Free forever plan</span>
-        <span>No credit card</span>
-        <span>Cancel anytime</span>
+        <span>Focused</span>
+        <span>Structured</span>
+        <span>Efficient</span>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-.btn {
+.cta-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 20px;
-  border-radius: 6px;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #f1ece6;
+  color: black;
+  font-size: 14px;
   font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: 1px solid transparent;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 0 18px rgba(255, 255, 255, 0.12);
 }
 
-.btn-primary {
-  background: var(--color-blue);
-  color: #fff;
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+.cta-button-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 
-.btn-primary:hover {
-  background: #2563eb;
-  opacity: 1;
+.cta-button-arrow svg {
+  width: 16px;
+  height: 16px;
 }
 
 .cta-section {
   text-align: center;
   padding: 100px 0;
   background: radial-gradient(circle at top, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
-  border-top: 1px solid var(--panel-border);
+  border-top: none;
 }
 
 .benefits {

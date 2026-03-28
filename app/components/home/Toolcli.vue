@@ -1,8 +1,11 @@
 <template>
   <section class="container text-center toolcli-section">
     <div class="section-header" style="max-width: 600px; margin: 0 auto 30px">
-      <h2 class="section-title">Works with your favorite tools</h2>
-      <p class="section-subtitle">Seamlessly integrate with the tools you already use and love.</p>
+      <h2 class="section-title">Create, snippet, and generate with lencamo-cli</h2>
+      <p class="section-subtitle">
+        A lightweight CLI that helps you start clean, stay productive, and keep your setup work
+        out of the way.
+      </p>
     </div>
 
     <div
@@ -69,7 +72,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, ref } from 'vue'
 
-const installCommand = 'npm install @lencamo/cli'
+const installCommand = 'npm install -g lencamo-cli'
 const copied = ref(false)
 
 let resetCopiedTimer: ReturnType<typeof setTimeout> | undefined

@@ -1,90 +1,113 @@
 <template>
   <section id="preview" class="container preview-section">
     <div class="preview-content">
-      <h2 class="section-title preview-title">Write code smarter</h2>
+      <h2 class="section-title preview-title">TingNote</h2>
       <p class="hero-desc preview-desc">
-        Our intelligent code editor understands your codebase and provides context-aware
-        suggestions, helping you write better code faster.
+        A focused workspace for writing, thinking, and organizing knowledge.
       </p>
       <ul class="bullet-list">
-        <li>AI-powered autocomplete with 95% accuracy</li>
-        <li>Real-time error detection and fixes</li>
-        <li>Smart refactoring suggestions</li>
-        <li>Inline documentation on hover</li>
+        <li>AI Q&amp;A for faster search and understanding</li>
+        <li>Tab completion to speed up editing</li>
+        <li>Real-time Markdown editing and preview</li>
+        <li>Mind mapping for structured organization</li>
       </ul>
     </div>
 
     <div class="preview-visual">
-      <div class="code-card">
-        <div class="code-header">
-          <div class="code-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+      <div class="preview-carousel" @mouseenter="stopAutoPlay" @mouseleave="startAutoPlay">
+        <div class="preview-carousel-viewport" aria-roledescription="carousel">
+          <div
+            class="preview-carousel-track"
+            :style="{ transform: `translateX(-${activeIndex * 100}%)` }"
+          >
+            <div v-for="slide in slides" :key="slide.src" class="preview-slide">
+              <img class="preview-slide-image" :src="slide.src" loading="lazy" />
+            </div>
           </div>
-          <span class="code-title">app.ts</span>
         </div>
-        <div class="code-body">
-          <div class="code-line">
-            <span class="token keyword">import</span>
-          </div>
-          <div class="code-line">
-            <span class="token punctuation">{</span> Lencamo <span class="token punctuation">}</span>
-          </div>
-          <div class="code-line">
-            <span class="token keyword">from</span> <span class="token string">'@lencamo/core'</span
-            ><span class="token punctuation">;</span>
-          </div>
-
-          <div class="code-line code-line-empty"></div>
-
-          <div class="code-line">
-            <span class="token keyword">const</span> app <span class="token operator">=</span>
-          </div>
-          <div class="code-line">
-            <span class="token keyword">new</span> <span class="token class">Lencamo</span
-            ><span class="token punctuation">(</span><span class="token punctuation">{</span> ai<span
-              class="token punctuation"
-              >:</span
-            >
-          </div>
-          <div class="code-line code-line-indent">
-            <span class="token keyword">true</span><span class="token punctuation">,</span>
-            collab<span class="token punctuation">:</span>
-          </div>
-          <div class="code-line code-line-indent">
-            <span class="token keyword">true</span><span class="token punctuation">,</span>
-            theme<span class="token punctuation">:</span>
-          </div>
-          <div class="code-line code-line-indent">
-            <span class="token string">'dark'</span> <span class="token punctuation">}</span
-            ><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          </div>
-
-          <div class="code-line code-line-empty"></div>
-
-          <div class="code-line">
-            <span class="token comment">// AI suggests: Add error handling</span>
-          </div>
-          <div class="code-line">
-            app<span class="token punctuation">.</span><span class="token function">start</span
-            ><span class="token punctuation">(</span><span class="token punctuation">)</span
-            ><span class="token punctuation">.</span><span class="token function">then</span
-            ><span class="token punctuation">(</span><span class="token punctuation">(</span
-            ><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
-          </div>
-          <div class="code-line">
-            <span class="token punctuation">{</span> console<span class="token punctuation">.</span
-            ><span class="token function">log</span><span class="token punctuation">(</span
-            ><span class="token string">'Ready!'</span><span class="token punctuation">)</span
-            ><span class="token punctuation">;</span> <span class="token punctuation">}</span
-            ><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <div class="preview-carousel-footer">
+          <p class="preview-carousel-description">{{ activeSlide?.description || '' }}</p>
+          <div class="preview-carousel-dots">
+            <button
+              v-for="(slide, index) in slides"
+              :key="slide.src"
+              :class="['preview-carousel-dot', { 'is-active': index === activeIndex }]"
+              type="button"
+              :aria-label="`Go to slide ${index + 1}`"
+              @click="goToSlide(index)"
+            ></button>
           </div>
         </div>
       </div>
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import articleImage from '~/assets/image/article.png'
+import homeImage from '~/assets/image/home.png'
+import mindImage from '~/assets/image/mind.png'
+import robotImage from '~/assets/image/robot.png'
+
+const slides = [
+  {
+    src: homeImage,
+    description: 'A quick look at the lencamo '
+  },
+  {
+    src: robotImage,
+    description: 'A supporting visual that extends the '
+  },
+  {
+    src: articleImage,
+    description: 'A content-oriented screen that helps present '
+  },
+  {
+    src: mindImage,
+    description: 'A more conceptual frame used to round out'
+  }
+] as const
+
+const activeIndex = ref(0)
+const activeSlide = computed(() => slides[activeIndex.value])
+
+let autoPlayTimer: ReturnType<typeof window.setInterval> | undefined
+
+function goToSlide(index: number) {
+  activeIndex.value = (index + slides.length) % slides.length
+}
+
+function nextSlide() {
+  goToSlide(activeIndex.value + 1)
+}
+
+function previousSlide() {
+  goToSlide(activeIndex.value - 1)
+}
+
+function stopAutoPlay() {
+  if (autoPlayTimer) {
+    window.clearInterval(autoPlayTimer)
+    autoPlayTimer = undefined
+  }
+}
+
+function startAutoPlay() {
+  stopAutoPlay()
+  autoPlayTimer = window.setInterval(() => {
+    nextSlide()
+  }, 4000)
+}
+
+onMounted(() => {
+  startAutoPlay()
+})
+
+onBeforeUnmount(() => {
+  stopAutoPlay()
+})
+</script>
 
 <style scoped>
 .preview-section {
@@ -93,6 +116,8 @@
   gap: 64px;
   padding-top: 80px;
   padding-bottom: 80px;
+
+  background: radial-gradient(circle at bottom, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
 }
 
 .preview-content {
@@ -113,103 +138,77 @@
   min-width: 0;
 }
 
-.code-card {
+.preview-carousel {
   background: #0d0d0d;
   border: 1px solid var(--panel-border);
   border-radius: 8px;
   overflow: hidden;
-  font-family: var(--font-mono);
-  font-size: 14px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
-.code-header {
-  background: rgba(255, 255, 255, 0.02);
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--panel-border);
+.preview-carousel-viewport {
+  position: relative;
+  overflow: hidden;
+  height: 355px;
+  background: #050505;
+}
+
+.preview-carousel-track {
   display: flex;
+  height: 100%;
+  transition: transform 0.45s ease;
+}
+
+.preview-slide {
+  min-width: 100%;
+  height: 100%;
+}
+
+.preview-slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-carousel-footer {
+  padding: 5px 10px;
+  border-top: 1px solid var(--panel-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.preview-carousel-description {
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+.preview-carousel-dots {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
-.code-dots {
-  display: flex;
-  gap: 6px;
+.preview-carousel-dot {
+  width: 8px;
+  height: 8px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.16);
+  cursor: pointer;
+  transition:
+    width 0.2s,
+    background 0.2s;
 }
 
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--panel-border);
-}
-
-.dot:nth-child(1) {
-  background: #ef4444;
-}
-
-.dot:nth-child(2) {
-  background: #f59e0b;
-}
-
-.dot:nth-child(3) {
-  background: #10b981;
-}
-
-.code-title {
-  color: var(--text-muted);
-  font-size: 12px;
-  margin-left: 8px;
-}
-
-.code-body {
-  padding: 16px;
-  overflow-x: auto;
-  color: #d4d4d8;
-  margin: 0;
-}
-
-.code-line {
-  line-height: 1.65;
-  white-space: nowrap;
-}
-
-.code-line-indent {
-  padding-left: 28px;
-}
-
-.code-line-empty {
-  height: 24px;
-}
-
-.token.keyword {
-  color: var(--color-pink);
-}
-
-.token.function {
-  color: var(--color-blue);
-}
-
-.token.string {
-  color: var(--color-green);
-}
-
-.token.comment {
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-.token.punctuation,
-.token.operator {
-  color: #8b949e;
-}
-
-.token.property {
-  color: var(--color-cyan);
-}
-
-.token.class {
-  color: var(--color-orange);
+.preview-carousel-dot.is-active {
+  width: 24px;
+  background: var(--color-cyan);
 }
 
 .bullet-list {
@@ -246,6 +245,19 @@
 
   .preview-visual {
     width: 100%;
+  }
+
+  .preview-carousel-viewport {
+    height: 320px;
+  }
+
+  .preview-carousel-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .preview-carousel-description {
+    max-width: none;
   }
 }
 </style>
