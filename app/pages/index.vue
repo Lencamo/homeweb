@@ -1,17 +1,17 @@
 <template>
-  <HomeHeroSection />
-  <HomeFeaturesSection />
-  <HomePreviewSection />
-  <HomeIntegrationsSection />
-  <HomeCtaSection />
+  <HomeHero />
+  <HomeFeatures />
+  <HomePreview />
+  <HomeIntegrations />
+  <HomeCta />
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-  layout: 'default' // Use the default layout which includes the header and footer
+  layout: 'default',
 })
 
 useHead({
-  title: 'lencamo | Modern Developer Tools'
+  title: 'lencamo | Modern Developer Tools',
 })
 </script>
