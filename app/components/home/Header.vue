@@ -1,7 +1,10 @@
 <template>
   <header>
     <div class="container nav-container">
-      <div class="logo"><span class="text-blue">▲</span> lencamo</div>
+      <div class="logo">
+        <img src="/favicon.svg" alt="lencamo logo" class="logo-icon" />
+        <span>lencamo</span>
+      </div>
       <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#preview">Code Preview</a>
@@ -40,5 +43,12 @@ header {
 
 .nav-links a:hover {
   color: var(--text-main);
+}
+
+.logo-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  flex: none;
 }
 </style>

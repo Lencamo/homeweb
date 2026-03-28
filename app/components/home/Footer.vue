@@ -2,8 +2,8 @@
   <footer style="border-top: none; padding-top: 0">
     <div class="container" style="border-top: 1px solid var(--panel-border); padding-top: 48px">
       <div class="logo mb-4" style="text-align: center">
-        <span class="text-blue">▲</span>
-        lencamo
+        <img src="/favicon.svg" alt="lencamo logo" class="logo-icon" />
+        <span>lencamo</span>
       </div>
       <div class="footer-links">
         <a href="#">Product</a>
@@ -31,5 +31,12 @@ footer {
   justify-content: center;
   gap: 24px;
   margin-bottom: 16px;
+}
+
+.logo-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  flex: none;
 }
 </style>

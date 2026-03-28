@@ -116,10 +116,14 @@ section:last-child {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-weight: 600;
   font-family: var(--font-mono);
   color: var(--text-main);
   font-size: 16px;
+  line-height: 1;
 }
 
 .hero-title {
