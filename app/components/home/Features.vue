@@ -1,5 +1,5 @@
 <template>
-  <section id="features" class="container">
+  <section id="features" class="container features-section">
     <div class="section-header text-center" style="max-width: 600px; margin: 0 auto 48px">
       <h2 class="section-title" style="font-size: 32px">Everything you need to ship faster</h2>
       <p class="section-subtitle">Features</p>
@@ -53,6 +53,11 @@
 </template>
 
 <style scoped>
+.features-section {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
 .feature-icon {
   font-size: 24px;
   margin-bottom: 20px;

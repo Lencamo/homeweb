@@ -1,8 +1,8 @@
 <template>
-  <section id="preview" class="container preview-section" style="padding-top: 80px; padding-bottom: 80px">
-    <div class="hero-content" style="flex: 1">
-      <h2 class="section-title" style="font-size: 32px">Write code smarter</h2>
-      <p class="hero-desc" style="font-size: 18px; margin-bottom: 24px">
+  <section id="preview" class="container preview-section">
+    <div class="preview-content">
+      <h2 class="section-title preview-title">Write code smarter</h2>
+      <p class="hero-desc preview-desc">
         Our intelligent code editor understands your codebase and provides context-aware
         suggestions, helping you write better code faster.
       </p>
@@ -14,8 +14,8 @@
       </ul>
     </div>
 
-    <div class="hero-visual" style="flex: 1.2">
-      <div class="code-card" style="box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4)">
+    <div class="preview-visual">
+      <div class="code-card">
         <div class="code-header">
           <div class="code-dots">
             <div class="dot"></div>
@@ -24,12 +24,63 @@
           </div>
           <span class="code-title">app.ts</span>
         </div>
-        <pre class="code-body"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Lencamo <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@lencamo/core'</span><span class="token punctuation">;</span>
+        <div class="code-body">
+          <div class="code-line">
+            <span class="token keyword">import</span>
+          </div>
+          <div class="code-line">
+            <span class="token punctuation">{</span> Lencamo <span class="token punctuation">}</span>
+          </div>
+          <div class="code-line">
+            <span class="token keyword">from</span> <span class="token string">'@lencamo/core'</span
+            ><span class="token punctuation">;</span>
+          </div>
 
-<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class">Lencamo</span><span class="token punctuation">(</span><span class="token punctuation">{</span> ai<span class="token punctuation">:</span> <span class="token keyword">true</span><span class="token punctuation">,</span> collab<span class="token punctuation">:</span> <span class="token keyword">true</span><span class="token punctuation">,</span> theme<span class="token punctuation">:</span> <span class="token string">'dark'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <div class="code-line code-line-empty"></div>
 
-<span class="token comment">// AI suggests: Add error handling</span>
-app<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Ready!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+          <div class="code-line">
+            <span class="token keyword">const</span> app <span class="token operator">=</span>
+          </div>
+          <div class="code-line">
+            <span class="token keyword">new</span> <span class="token class">Lencamo</span
+            ><span class="token punctuation">(</span><span class="token punctuation">{</span> ai<span
+              class="token punctuation"
+              >:</span
+            >
+          </div>
+          <div class="code-line code-line-indent">
+            <span class="token keyword">true</span><span class="token punctuation">,</span>
+            collab<span class="token punctuation">:</span>
+          </div>
+          <div class="code-line code-line-indent">
+            <span class="token keyword">true</span><span class="token punctuation">,</span>
+            theme<span class="token punctuation">:</span>
+          </div>
+          <div class="code-line code-line-indent">
+            <span class="token string">'dark'</span> <span class="token punctuation">}</span
+            ><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          </div>
+
+          <div class="code-line code-line-empty"></div>
+
+          <div class="code-line">
+            <span class="token comment">// AI suggests: Add error handling</span>
+          </div>
+          <div class="code-line">
+            app<span class="token punctuation">.</span><span class="token function">start</span
+            ><span class="token punctuation">(</span><span class="token punctuation">)</span
+            ><span class="token punctuation">.</span><span class="token function">then</span
+            ><span class="token punctuation">(</span><span class="token punctuation">(</span
+            ><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+          </div>
+          <div class="code-line">
+            <span class="token punctuation">{</span> console<span class="token punctuation">.</span
+            ><span class="token function">log</span><span class="token punctuation">(</span
+            ><span class="token string">'Ready!'</span><span class="token punctuation">)</span
+            ><span class="token punctuation">;</span> <span class="token punctuation">}</span
+            ><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -40,14 +91,25 @@ app<span class="token punctuation">.</span><span class="token function">start</s
   display: flex;
   align-items: center;
   gap: 64px;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 
-.hero-content {
+.preview-content {
   flex: 1;
 }
 
-.hero-visual {
-  flex: 1;
+.preview-title {
+  font-size: 32px;
+}
+
+.preview-desc {
+  font-size: 18px;
+  margin-bottom: 24px;
+}
+
+.preview-visual {
+  flex: 1.2;
   min-width: 0;
 }
 
@@ -58,6 +120,7 @@ app<span class="token punctuation">.</span><span class="token function">start</s
   overflow: hidden;
   font-family: var(--font-mono);
   font-size: 14px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .code-header {
@@ -103,8 +166,20 @@ app<span class="token punctuation">.</span><span class="token function">start</s
   padding: 16px;
   overflow-x: auto;
   color: #d4d4d8;
-  white-space: pre;
   margin: 0;
+}
+
+.code-line {
+  line-height: 1.65;
+  white-space: nowrap;
+}
+
+.code-line-indent {
+  padding-left: 28px;
+}
+
+.code-line-empty {
+  height: 24px;
 }
 
 .token.keyword {
@@ -169,7 +244,7 @@ app<span class="token punctuation">.</span><span class="token function">start</s
     flex-direction: column;
   }
 
-  .hero-visual {
+  .preview-visual {
     width: 100%;
   }
 }
