@@ -31,7 +31,7 @@ function detectBrowserLocale(): SiteLocale {
 export const siteMessages = {
   en: {
     seo: {
-      title: 'lencamo | Modern Developer Tools',
+      title: 'lencamo | CLI, Templates & TingNote',
       description:
         'A personal site for templates, CLI tooling, and TingNote, built for focused developer workflows.'
     },
@@ -159,7 +159,7 @@ export const siteMessages = {
   },
   zh: {
     seo: {
-      title: 'lencamo | 现代开发者工具',
+      title: 'lencamo | CLI、模板与 TingNote',
       description: '一个展示模板、CLI 工具和 TingNote 产品的个人站点，面向更专注的开发流程。'
     },
     localeSuggestion: {
