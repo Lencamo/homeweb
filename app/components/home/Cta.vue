@@ -8,7 +8,7 @@
         {{ messages.cta.description }}
       </p>
 
-      <a href="#" class="cta-button">
+      <a href="https://tingbiji.com/auth" target="_blank" class="cta-button">
         <span>{{ messages.cta.button }}</span>
         <span class="cta-button-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none">

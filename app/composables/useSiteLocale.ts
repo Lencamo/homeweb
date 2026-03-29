@@ -112,36 +112,36 @@ export const siteMessages = {
           icon: '✧',
           title: 'lencamo-cli',
           description:
-            'Open source CLI tooling for scaffolding, snippets, and everyday workflow support.'
+            'Open source CLI tooling for scaffolding, snippets, and everyday workflow support.',
+          githubHref: 'https://github.com/ren-34/lencamo-cli'
         },
         {
           icon: '⚡',
           title: 'Open Blog Starter',
-          description: 'An open source starter for content sites, blogs, and personal publishing.'
+          description: 'An open source starter for content sites, blogs, and personal publishing.',
+          href: 'https://ting-hexo.netlify.app/',
+          githubHref: 'https://github.com/Lencamo/ting-hexo'
         },
         {
           icon: '⎇',
           title: 'Docs Starter',
           description:
-            'A free project base for documentation, guides, and developer-facing content.'
+            'A free project base for documentation, guides, and developer-facing content.',
+          href: 'https://note-taking.cn'
         },
         {
           icon: '🚀',
           title: 'TingNote',
           description:
-            'A premium writing product focused on notes, knowledge, and structured thinking.'
-        },
-        {
-          icon: '🧩',
-          title: 'SaaS Launch Kit',
-          description:
-            'A paid project template for shipping polished SaaS landing pages and product sites.'
+            'A premium writing product focused on notes, knowledge, and structured thinking.',
+          href: 'https://tingbiji.com'
         },
         {
           icon: '☁️',
           title: 'Premium Dashboard',
           description:
-            'A production-ready paid admin template with stronger structure and cleaner UI detail.'
+            'A production-ready paid admin template with stronger structure and cleaner UI detail.',
+          href: 'https://vue3-ting-admin.vercel.app'
         }
       ]
     },
@@ -236,32 +236,33 @@ export const siteMessages = {
         {
           icon: '✧',
           title: 'lencamo-cli',
-          description: '开源 CLI 工具集，用于脚手架、代码片段和日常开发流程支持。'
+          description: '开源 CLI 工具集，用于脚手架、代码片段和日常开发流程支持。',
+          githubHref: 'https://github.com/ren-34/lencamo-cli'
         },
         {
           icon: '⚡',
           title: '开放博客模板',
-          description: '适用于内容站、博客和个人发布场景的开源起步模板。'
+          description: '适用于内容站、博客和个人发布场景的开源起步模板。',
+          href: 'https://ting-hexo.netlify.app/',
+          githubHref: 'https://github.com/Lencamo/ting-hexo'
         },
         {
           icon: '⎇',
           title: '文档站模板',
-          description: '一个免费的项目基础模板，适合文档、指南和开发者内容。'
+          description: '一个免费的项目基础模板，适合文档、指南和开发者内容。',
+          href: 'https://note-taking.cn'
         },
         {
           icon: '🚀',
           title: 'TingNote',
-          description: '一款面向笔记、知识沉淀和结构化思考的付费写作产品。'
-        },
-        {
-          icon: '🧩',
-          title: 'SaaS 启动套件',
-          description: '一套用于快速上线精致 SaaS 官网和产品页的付费项目模板。'
+          description: '一款面向笔记、知识沉淀和结构化思考的付费写作产品。',
+          href: 'https://tingbiji.com'
         },
         {
           icon: '☁️',
           title: '高级后台模板',
-          description: '面向生产环境的付费管理后台模板，结构更稳，界面更干净。'
+          description: '面向生产环境的付费管理后台模板，结构更稳，界面更干净。',
+          href: 'https://vue3-ting-admin.vercel.app'
         }
       ]
     },
